@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>عيادة ابتسامة الشام لطب الأسنان</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Almarai:wght@300;400;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#FFFFFF;
+    --bg-alt:#F6F9F8;
+    --ink:#26332F;
+    --ink-soft:#71827D;
+    --primary:#5B8C7B;
+    --primary-light:#7BA695;
+    --primary-soft:#E4EFEB;
+    --accent:#E8A87C;
+    --accent-soft:#FBEADC;
+    --line:#E9EEEC;
+    --shadow: 0 20px 45px rgba(38,51,47,0.09);
+    --shadow-sm: 0 8px 20px rgba(38,51,47,0.07);
+    box-sizing:border-box;
+    padding-top:env(safe-area-inset-top,0px);
+    padding-bottom:env(safe-area-inset-bottom,0px);
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg:#141A18; --bg-alt:#1C2422; --ink:#EDF3F1; --ink-soft:#9FB0AB;
+      --primary:#7BA695; --primary-light:#9DC2B3; --primary-soft:#233530; --accent:#F0B98A; --accent-soft:#3A2A1E; --line:#28322F;
+      --shadow: 0 20px 45px rgba(0,0,0,0.35); --shadow-sm: 0 8px 20px rgba(0,0,0,0.3);
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#141A18; --bg-alt:#1C2422; --ink:#EDF3F1; --ink-soft:#9FB0AB;
+    --primary:#7BA695; --primary-light:#9DC2B3; --primary-soft:#233530; --accent:#F0B98A; --accent-soft:#3A2A1E; --line:#28322F;
+    --shadow: 0 20px 45px rgba(0,0,0,0.35); --shadow-sm: 0 8px 20px rgba(0,0,0,0.3);
+  }
+  html{scroll-padding-top:env(safe-area-inset-top,0px); scroll-behavior:smooth;}
+  *{box-sizing:border-box;}
+  body{
+    margin:0; background:var(--bg); color:var(--ink);
+    font-family:'Almarai', system-ui, sans-serif; line-height:1.85; font-weight:400;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3{ font-family:'Almarai', sans-serif; font-weight:800; margin:0 0 .45em; line-height:1.4; }
+  p{ color:var(--ink-soft); margin:0 0 1em; max-width:60ch; }
+  img,svg{max-width:100%;}
+  a{color:inherit;}
+  .wrap{ max-width:1100px; margin:0 auto; padding:0 24px; }
+
+  @media (prefers-reduced-motion: no-preference){
+    .fade-in{ animation: fadeUp .7s ease both; }
+    .fade-in.d1{ animation-delay:.1s; }
+    .fade-in.d2{ animation-delay:.2s; }
+    @keyframes fadeUp{ from{ opacity:0; transform:translateY(14px);} to{ opacity:1; transform:translateY(0);} }
+  }
+
+  /* header */
+  header{
+    position:sticky; top:0; z-index:50;
+    background:color-mix(in srgb, var(--bg) 90%, transparent);
+    backdrop-filter:blur(12px);
+    box-shadow:0 1px 0 var(--line);
+    padding-top:env(safe-area-inset-top,0px);
+  }
+  .nav{ display:flex; align-items:center; justify-content:space-between; padding:18px 0; }
+  .brand{ display:flex; align-items:center; gap:10px; font-weight:800; font-size:1.15rem; }
+  .brand .mark{ width:36px; height:36px; flex:none; position:relative; }
+  .brand .mark span{ position:absolute; width:24px; height:24px; border-radius:50%; }
+  .brand .mark span.a{ background:var(--primary); opacity:.85; top:0; right:0; }
+  .brand .mark span.b{ background:var(--accent); opacity:.85; bottom:0; left:0; }
+  .nav-links{ display:flex; gap:30px; font-size:.95rem; font-weight:700; }
+  .nav-links a{ text-decoration:none; color:var(--ink-soft); transition:color .2s; }
+  .nav-links a:hover{ color:var(--primary); }
+  .btn{
+    display:inline-flex; align-items:center; gap:8px; border:none; cursor:pointer;
+    font-family:'Almarai',sans-serif; font-weight:700; font-size:.95rem;
+    padding:14px 28px; border-radius:999px; transition:transform .2s ease, box-shadow .2s ease, background .2s ease;
+  }
+  .btn-primary{ background:var(--primary); color:#fff; box-shadow:var(--shadow-sm); }
+  .btn-primary:hover{ transform:translateY(-2px); box-shadow:var(--shadow); background:var(--primary-light); }
+  .btn-ghost{ background:var(--bg-alt); color:var(--ink); }
+  .btn-ghost:hover{ background:var(--primary-soft); }
+  .btn:focus-visible{ outline:2.5px solid var(--primary); outline-offset:3px; }
+  .nav .btn-primary{ padding:11px 24px; font-size:.88rem; }
+  .nav-toggle{ display:none; background:var(--bg-alt); border:none; border-radius:12px; width:42px; height:42px; color:var(--ink); font-size:1.3rem; cursor:pointer; }
+
+  /* hero */
+  .hero{ padding:60px 0 30px; overflow:hidden; }
+  .hero-grid{ display:grid; grid-template-columns:1.05fr .95fr; gap:56px; align-items:center; }
+  .hero h1{ font-size:clamp(2rem, 4vw, 2.9rem); }
+  .hero p.lead{ font-size:1.08rem; max-width:44ch; }
+  .hero-cta{ display:flex; gap:14px; margin-top:30px; flex-wrap:wrap; }
+  .hero-art{ position:relative; min-height:360px; }
+  .hero-art svg.blob{ position:absolute; inset:0; width:100%; height:100%; }
+  .float-card{
+    position:absolute; background:var(--bg); border-radius:22px; box-shadow:var(--shadow);
+    padding:18px 22px; display:flex; align-items:center; gap:12px; max-width:220px;
+  }
+  .float-card .num{ font-weight:800; font-size:1.5rem; color:var(--primary); }
+  .float-card .lbl{ font-size:.8rem; color:var(--ink-soft); }
+  .float-card.c1{ top:8%; right:6%; }
+  .float-card.c2{ bottom:12%; left:2%; }
+  .float-badge{
+    position:absolute; top:44%; left:14%; background:var(--accent); color:#fff; border-radius:50%;
+    width:74px; height:74px; display:flex; flex-direction:column; align-items:center; justify-content:center;
+    box-shadow:var(--shadow); font-weight:800;
+  }
+  .float-badge span{ font-size:.65rem; font-weight:400; margin-top:2px; }
+
+  /* sections */
+  section{ padding:70px 0; }
+  .section-head{ max-width:600px; margin-bottom:44px; }
+  .section-head h2{ font-size:clamp(1.5rem,2.8vw,2rem); }
+  .wave{ display:block; width:100%; height:56px; margin-top:-1px; }
+
+  /* services */
+  .services-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(230px,1fr)); gap:22px; }
+  .service-card{
+    background:var(--bg-alt); border-radius:22px; padding:30px 26px; cursor:pointer; text-align:right;
+    transition:transform .2s ease, box-shadow .2s ease, background .2s ease; border:1px solid transparent;
+  }
+  .service-card:hover, .service-card:focus-visible{ transform:translateY(-4px); box-shadow:var(--shadow-sm); background:var(--bg); border-color:var(--line); }
+  .service-card .badge{ width:48px; height:48px; border-radius:16px; display:flex; align-items:center; justify-content:center; margin-bottom:16px; }
+  .service-card:nth-child(odd) .badge{ background:var(--primary-soft); }
+  .service-card:nth-child(even) .badge{ background:var(--accent-soft); }
+  .service-card:nth-child(odd) .badge svg{ color:var(--primary); }
+  .service-card:nth-child(even) .badge svg{ color:var(--accent); }
+  .service-card svg{ width:24px; height:24px; }
+  .service-card h3{ font-size:1.02rem; margin-bottom:6px; }
+  .service-card p{ font-size:.9rem; margin:0; }
+
+  /* why us */
+  .why-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:28px; }
+  .why-item{ display:flex; gap:16px; align-items:flex-start; }
+  .why-item .ic{ width:42px; height:42px; flex:none; border-radius:14px; background:var(--primary-soft); display:flex; align-items:center; justify-content:center; }
+  .why-item svg{ width:20px; height:20px; color:var(--primary); }
+  .why-item h3{ font-size:1rem; margin-bottom:4px; }
+  .why-item p{ font-size:.9rem; margin:0; }
+
+  /* doctors */
+  .doctors-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:28px; }
+  .doctor-card{ text-align:center; }
+  .doctor-avatar{
+    width:96px; height:96px; border-radius:50%; margin:0 auto 16px; display:flex; align-items:center; justify-content:center;
+    background:var(--primary-soft); color:var(--primary); font-weight:800; font-size:1.6rem; border:3px solid var(--bg); box-shadow:0 0 0 3px var(--primary-soft);
+  }
+  .doctor-card h3{ font-size:1.02rem; margin-bottom:2px; }
+  .doctor-role{ color:var(--accent); font-size:.85rem; font-weight:700; margin-bottom:8px; }
+  .doctor-card p{ font-size:.88rem; margin:0 auto; }
+
+  /* booking */
+  .booking{ background:var(--bg-alt); }
+  .booking-box{ max-width:620px; margin:0 auto; border-radius:32px; padding:40px; background:var(--bg); box-shadow:var(--shadow); }
+  .steps{ display:flex; align-items:center; justify-content:center; gap:6px; margin-bottom:34px; }
+  .step{ display:flex; align-items:center; gap:6px; }
+  .step .dot{ width:11px; height:11px; border-radius:50%; background:var(--line); transition:background .2s; }
+  .step.active .dot, .step.done .dot{ background:var(--primary); }
+  .step .bar{ width:28px; height:2px; background:var(--line); }
+  .step.done .bar{ background:var(--primary); }
+  .form-panel{ display:none; }
+  .form-panel.active{ display:block; }
+  .field-group{ margin-bottom:18px; }
+  .field-group label{ display:block; font-size:.9rem; margin-bottom:8px; font-weight:700; }
+  .field-group input, .field-group select, .field-group textarea{
+    width:100%; padding:14px 16px; border-radius:14px; border:1.5px solid var(--line);
+    background:var(--bg-alt); color:var(--ink); font-family:'Almarai',sans-serif; font-size:.95rem;
+  }
+  .field-group input:focus, .field-group select:focus, .field-group textarea:focus{ outline:none; border-color:var(--primary); background:var(--bg); }
+  .service-pick{ display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+  .service-pick label{ border:1.5px solid var(--line); border-radius:14px; padding:12px 14px; font-size:.87rem; cursor:pointer; display:block; font-weight:500; background:var(--bg-alt); transition:border-color .2s, background .2s; }
+  .service-pick input{ display:none; }
+  .service-pick input:checked + span{ color:var(--primary); font-weight:700; }
+  .service-pick label:has(input:checked){ border-color:var(--primary); background:var(--primary-soft); }
+  .form-actions{ display:flex; justify-content:space-between; margin-top:26px; gap:12px; }
+  .confirm-box{ text-align:center; padding:16px 0; }
+  .confirm-box .ok{ width:64px; height:64px; border-radius:50%; background:var(--primary-soft); display:flex; align-items:center; justify-content:center; margin:0 auto 16px; }
+  .confirm-box svg{ width:30px; height:30px; color:var(--primary); }
+  .confirm-detail{ text-align:right; background:var(--bg-alt); border-radius:16px; padding:18px 20px; margin-top:20px; font-size:.9rem; }
+  .confirm-detail div{ display:flex; justify-content:space-between; padding:7px 0; border-bottom:1px dashed var(--line); }
+  .confirm-detail div:last-child{ border-bottom:none; }
+
+  /* testimonials */
+  .testi-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:22px; }
+  .testi-card{ background:var(--bg-alt); border-radius:22px; padding:28px; }
+  .testi-card p{ font-size:.94rem; margin-bottom:16px; }
+  .testi-name{ font-weight:700; font-size:.88rem; }
+  .testi-stars{ color:var(--accent); letter-spacing:2px; margin-bottom:10px; display:block; }
+
+  /* location */
+  .loc-grid{ display:grid; grid-template-columns:1fr 1fr; gap:44px; align-items:start; }
+  .hours-table{ width:100%; border-collapse:collapse; font-size:.92rem; }
+  .hours-table td{ padding:10px 0; border-bottom:1px dashed var(--line); }
+  .hours-table td:last-child{ color:var(--ink-soft); text-align:left; }
+  .map-box{ height:260px; border-radius:26px; background:var(--bg-alt); display:flex; align-items:center; justify-content:center; color:var(--ink-soft); font-weight:700; }
+
+  footer{ border-top:1px solid var(--line); padding:44px 0 30px; }
+  .foot-grid{ display:grid; grid-template-columns:1.3fr 1fr 1fr; gap:32px; margin-bottom:28px; }
+  footer h3{ font-size:.92rem; margin-bottom:12px; }
+  footer ul{ list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:8px; font-size:.9rem; color:var(--ink-soft); }
+  .foot-bottom{ padding-top:20px; border-top:1px solid var(--line); font-size:.82rem; color:var(--ink-soft); text-align:center; }
+
+  @media (max-width:860px){
+    .hero-grid, .loc-grid{ grid-template-columns:1fr; }
+    .hero-art{ order:-1; min-height:280px; }
+    .nav-links{ position:fixed; inset-inline:0; top:70px; background:var(--bg); flex-direction:column; padding:20px 24px; box-shadow:0 1px 0 var(--line); transform:translateY(-130%); transition:transform .25s ease; }
+    .nav-links.open{ transform:translateY(0); }
+    .nav-toggle{ display:block; }
+    .foot-grid{ grid-template-columns:1fr; }
+    .service-pick{ grid-template-columns:1fr; }
+    .float-card{ max-width:170px; padding:14px 16px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <div class="brand">
+      <div class="mark"><span class="a"></span><span class="b"></span></div>
+      <span>ابتسامة الشام</span>
+    </div>
+    <nav class="nav-links" id="navLinks">
+      <a href="#services">الخدمات</a>
+      <a href="#doctors">أطباؤنا</a>
+      <a href="#why">لماذا نحن</a>
+      <a href="#location">الموقع والمواعيد</a>
+    </nav>
+    <div style="display:flex; align-items:center; gap:10px;">
+      <a href="#booking" class="btn btn-primary">احجز موعدك</a>
+      <button class="nav-toggle" id="navToggle" aria-label="القائمة">☰</button>
+    </div>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div class="fade-in">
+      <h1>عناية بأسنانك بهدوء، وبلا استعجال</h1>
+      <p class="lead">عيادة أسنان في قلب دمشق، بأطباء اختصاصيين وأجواء مريحة، نمنحك وقتاً كافياً لكل حالة ونتيجة تدوم. الحجز يأخذ أقل من دقيقتين.</p>
+      <div class="hero-cta">
+        <a href="#booking" class="btn btn-primary">احجز الآن</a>
+        <a href="#services" class="btn btn-ghost">تصفّح الخدمات</a>
+      </div>
+    </div>
+    <div class="hero-art fade-in d1">
+      <svg class="blob" viewBox="0 0 480 420" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+        <path d="M300,52 C368,40 430,96 440,168 C450,240 410,312 344,344 C278,376 190,368 138,320 C86,272 74,192 108,132 C142,72 232,64 300,52 Z" fill="var(--primary-soft)"/>
+        <path d="M320,110 C360,120 380,160 372,200 C364,240 328,268 286,264 C244,260 214,228 216,188 C218,148 252,116 292,112 C301,111 311,109 320,110 Z" fill="var(--accent-soft)" opacity="0.9"/>
+      </svg>
+      <div class="float-card c1"><div class="num">١٤</div><div class="lbl">سنة خبرة</div></div>
+      <div class="float-card c2"><div class="num">+٩,٠٠٠</div><div class="lbl">مريض تمت معالجته</div></div>
+      <div class="float-badge">٤.٩<span>تقييم</span></div>
+    </div>
+  </div>
+</section>
+
+<svg class="wave" viewBox="0 0 1200 60" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M0,30 C150,60 350,0 600,30 C850,60 1050,0 1200,30 L1200,60 L0,60 Z" fill="var(--bg-alt)"/>
+</svg>
+
+<section id="services" style="background:var(--bg-alt); padding-top:20px;">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>خدماتنا</h2>
+      <p>من الفحص الدوري إلى تحويل الابتسامة بالكامل، كل خدمة يشرف عليها طبيب اختصاصي في مجالها.</p>
+    </div>
+    <div class="services-grid" id="servicesGrid">
+      <button class="service-card" data-service="تنظيف وتلميع الأسنان">
+        <div class="badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 12c0-4.4 3.6-8 8-8s8 3.6 8 8-3.6 8-8 8"/><path d="M8 12h8M8 16h5"/></svg></div>
+        <h3>تنظيف وتلميع الأسنان</h3>
+        <p>إزالة الجير والتصبغات بجلسة مريحة كل ٦ أشهر.</p>
+      </button>
+      <button class="service-card" data-service="تبييض الأسنان">
+        <div class="badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="4"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2 2M17 17l2 2M4.9 19.1l2-2M17 7l2-2"/></svg></div>
+        <h3>تبييض الأسنان</h3>
+        <p>نتائج ملحوظة خلال جلسة واحدة بأحدث تقنيات الليزر.</p>
+      </button>
+      <button class="service-card" data-service="تقويم الأسنان">
+        <div class="badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 8h16M4 16h16M8 4v16M16 4v16"/></svg></div>
+        <h3>تقويم الأسنان</h3>
+        <p>تقويم معدني أو شفاف يناسب عمرك وأسلوب حياتك.</p>
+      </button>
+      <button class="service-card" data-service="حشوات تجميلية">
+        <div class="badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3l8 4v10l-8 4-8-4V7z"/></svg></div>
+        <h3>حشوات تجميلية</h3>
+        <p>حشوات بلون الأسنان الطبيعي، متينة وغير ملحوظة.</p>
+      </button>
+      <button class="service-card" data-service="زراعة الأسنان">
+        <div class="badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3v6M9 6h6M8 21l1-9h6l1 9"/></svg></div>
+        <h3>زراعة الأسنان</h3>
+        <p>بدائل ثابتة للأسنان المفقودة بمتابعة دقيقة بعد الزراعة.</p>
+      </button>
+      <button class="service-card" data-service="ابتسامة هوليود">
+        <div class="badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 14c2 4 6 6 8 6s6-2 8-6"/><path d="M8 10h.01M16 10h.01"/></svg></div>
+        <h3>ابتسامة هوليود</h3>
+        <p>تصميم شامل للابتسامة بقشور خزفية دقيقة الشكل واللون.</p>
+      </button>
+      <button class="service-card" data-service="علاج جذور الأسنان">
+        <div class="badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2c-3 0-5 3-5 6 0 4 2 5 2 9 0 2 1 5 3 5s3-3 3-5c0-4 2-5 2-9 0-3-2-6-5-6Z"/></svg></div>
+        <h3>علاج جذور الأسنان</h3>
+        <p>علاج دقيق وخالٍ من الألم بجلسة واحدة غالباً.</p>
+      </button>
+      <button class="service-card" data-service="أسنان الأطفال">
+        <div class="badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M9 10h.01M15 10h.01M8 15c1.5 1.3 6.5 1.3 8 0"/></svg></div>
+        <h3>أسنان الأطفال</h3>
+        <p>بيئة مريحة تُشعر طفلك بالأمان من أول زيارة.</p>
+      </button>
+    </div>
+  </div>
+</section>
+
+<section id="why">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>لماذا يختارنا مرضانا</h2>
+      <p>تفاصيل صغيرة تصنع فرقاً كبيراً في تجربة العلاج.</p>
+    </div>
+    <div class="why-grid">
+      <div class="why-item">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2l8 4v6c0 5-3.4 8.4-8 10-4.6-1.6-8-5-8-10V6l8-4Z"/></svg></div>
+        <div><h3>تعقيم صارم</h3><p>أدوات معقمة بالكامل لكل مريض وفق معايير عالمية.</p></div>
+      </div>
+      <div class="why-item">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 21v-2a4 4 0 014-4h8a4 4 0 014 4v2M12 11a4 4 0 100-8 4 4 0 000 8Z"/></svg></div>
+        <div><h3>أطباء اختصاصيون</h3><p>كل حالة يشرف عليها طبيب متخصص في مجالها تحديداً.</p></div>
+      </div>
+      <div class="why-item">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 8v4l3 3M21 12a9 9 0 11-18 0 9 9 0 0118 0Z"/></svg></div>
+        <div><h3>مواعيد دقيقة</h3><p>لا انتظار طويل، وقتك محسوب ضمن جدول الطبيب.</p></div>
+      </div>
+      <div class="why-item">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 12l2-2 4 4 10-10 2 2-12 12-6-6Z"/></svg></div>
+        <div><h3>خطة علاج واضحة</h3><p>تكلفة وخطوات العلاج تُشرح لك قبل البدء، دون مفاجآت.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="doctors" style="background:var(--bg-alt);">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>تعرّف على أطبائنا</h2>
+      <p>فريق يجمع بين الخبرة الطويلة والتدريب على أحدث التقنيات.</p>
+    </div>
+    <div class="doctors-grid">
+      <div class="doctor-card">
+        <div class="doctor-avatar">سح</div>
+        <h3>د. سارة الحوراني</h3>
+        <div class="doctor-role">اختصاصية تقويم الأسنان</div>
+        <p>١٢ عاماً من الخبرة في تقويم الأسنان للبالغين والمراهقين.</p>
+      </div>
+      <div class="doctor-card">
+        <div class="doctor-avatar">خم</div>
+        <h3>د. خالد المصري</h3>
+        <div class="doctor-role">اختصاصي زراعة الأسنان</div>
+        <p>أجرى أكثر من ٨٠٠ عملية زراعة أسنان ناجحة في دمشق.</p>
+      </div>
+      <div class="doctor-card">
+        <div class="doctor-avatar">رأ</div>
+        <h3>د. رند أبو سمرة</h3>
+        <div class="doctor-role">طب أسنان عام وتجميلي</div>
+        <p>متخصصة في ابتسامة هوليود والحشوات التجميلية الدقيقة.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="booking" class="booking">
+  <div class="wrap">
+    <div class="section-head" style="margin:0 auto 36px; text-align:center;">
+      <h2>احجز موعدك</h2>
+      <p style="margin:0 auto;">ثلاث خطوات بسيطة، وسيتواصل معك فريقنا لتأكيد الموعد خلال ساعات العمل.</p>
+    </div>
+    <div class="booking-box">
+      <div class="steps">
+        <div class="step active" data-step="1"><span class="dot"></span></div>
+        <span class="bar"></span>
+        <div class="step" data-step="2"><span class="dot"></span></div>
+        <span class="bar"></span>
+        <div class="step" data-step="3"><span class="dot"></span></div>
+        <span class="bar"></span>
+        <div class="step" data-step="4"><span class="dot"></span></div>
+      </div>
+
+      <form id="bookingForm">
+        <div class="form-panel active" data-panel="1">
+          <div class="field-group">
+            <label>اختر الخدمة المطلوبة</label>
+            <div class="service-pick" id="servicePick">
+              <label><input type="radio" name="service" value="تنظيف وتلميع الأسنان" required><span>تنظيف وتلميع الأسنان</span></label>
+              <label><input type="radio" name="service" value="تبييض الأسنان"><span>تبييض الأسنان</span></label>
+              <label><input type="radio" name="service" value="تقويم الأسنان"><span>تقويم الأسنان</span></label>
+              <label><input type="radio" name="service" value="حشوات تجميلية"><span>حشوات تجميلية</span></label>
+              <label><input type="radio" name="service" value="زراعة الأسنان"><span>زراعة الأسنان</span></label>
+              <label><input type="radio" name="service" value="ابتسامة هوليود"><span>ابتسامة هوليود</span></label>
+              <label><input type="radio" name="service" value="علاج جذور الأسنان"><span>علاج جذور الأسنان</span></label>
+              <label><input type="radio" name="service" value="أسنان الأطفال"><span>أسنان الأطفال</span></label>
+            </div>
+          </div>
+          <div class="form-actions" style="justify-content:flex-end;">
+            <button type="button" class="btn btn-primary" data-next>التالي</button>
+          </div>
+        </div>
+
+        <div class="form-panel" data-panel="2">
+          <div class="field-group">
+            <label for="apptDate">التاريخ المفضل</label>
+            <input type="date" id="apptDate" required>
+          </div>
+          <div class="field-group">
+            <label for="apptTime">الوقت المفضل</label>
+            <select id="apptTime" required>
+              <option value="">اختر وقتاً</option>
+              <option>09:00 ص</option>
+              <option>10:30 ص</option>
+              <option>12:00 م</option>
+              <option>02:00 م</option>
+              <option>04:00 م</option>
+              <option>06:00 م</option>
+            </select>
+          </div>
+          <div class="form-actions">
+            <button type="button" class="btn btn-ghost" data-prev>السابق</button>
+            <button type="button" class="btn btn-primary" data-next>التالي</button>
+          </div>
+        </div>
+
+        <div class="form-panel" data-panel="3">
+          <div class="field-group"><label for="fullName">الاسم الكامل</label><input type="text" id="fullName" required placeholder="مثال: عمر الزعبي"></div>
+          <div class="field-group"><label for="phone">رقم الجوال</label><input type="tel" id="phone" required placeholder="09xxxxxxxx" pattern="0[0-9]{9}"></div>
+          <div class="field-group"><label for="notes">ملاحظات (اختياري)</label><textarea id="notes" rows="3" placeholder="أي معلومة تودّ إخبار الطبيب بها"></textarea></div>
+          <div class="form-actions">
+            <button type="button" class="btn btn-ghost" data-prev>السابق</button>
+            <button type="submit" class="btn btn-primary">تأكيد الحجز</button>
+          </div>
+        </div>
+
+        <div class="form-panel" data-panel="4">
+          <div class="confirm-box">
+            <div class="ok"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 12l5 5L20 6"/></svg></div>
+            <h3>تم استلام طلب حجزك</h3>
+            <p style="margin:0 auto;">سيتصل بك فريق العيادة لتأكيد الموعد خلال ساعات العمل.</p>
+            <div class="confirm-detail" id="confirmDetail"></div>
+            <div style="margin-top:22px;">
+              <button type="button" class="btn btn-ghost" id="newBooking">حجز موعد آخر</button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="section-head">
+      <h2>ماذا يقول مرضانا</h2>
+    </div>
+    <div class="testi-grid">
+      <div class="testi-card">
+        <span class="testi-stars">★★★★★</span>
+        <p>حجزت موعد تبييض وكانت التجربة سريعة ومريحة من أول اتصال حتى المتابعة بعد الجلسة.</p>
+        <div class="testi-name">لينا، دمشق</div>
+      </div>
+      <div class="testi-card">
+        <span class="testi-stars">★★★★★</span>
+        <p>ابني كان خائفاً من طبيب الأسنان، لكن الفريق تعامل معه بصبر جعله يطلب الزيارة القادمة بنفسه.</p>
+        <div class="testi-name">أبو زيد، أبو رمانة</div>
+      </div>
+      <div class="testi-card">
+        <span class="testi-stars">★★★★★</span>
+        <p>شرح واضح لخطة تقويم الأسنان والتكلفة من البداية، بدون أي مفاجآت لاحقاً.</p>
+        <div class="testi-name">دانا، المزة</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="location" style="background:var(--bg-alt);">
+  <div class="wrap loc-grid">
+    <div>
+      <div class="section-head">
+        <h2>الموقع وساعات العمل</h2>
+        <p>عيادتنا في شارع الملك فيصل، حي أبو رمانة، دمشق، سوريا.</p>
+      </div>
+      <table class="hours-table">
+        <tr><td>السبت - الخميس</td><td>٩:٠٠ ص - ٧:٠٠ م</td></tr>
+        <tr><td>الجمعة</td><td>مغلق</td></tr>
+      </table>
+      <p style="margin-top:20px;">هاتف: <bdi>+963 11 445 0192</bdi> · واتساب: <bdi>+963 993 550 192</bdi></p>
+    </div>
+    <div class="map-box">خريطة الموقع (دمشق، سوريا)</div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <h3>عيادة ابتسامة الشام لطب الأسنان</h3>
+        <p style="max-width:40ch;">عناية شاملة بأسنانك، بخبرة أطباء اختصاصيين وأجواء مريحة، في قلب دمشق.</p>
+      </div>
+      <div>
+        <h3>روابط سريعة</h3>
+        <ul>
+          <li><a href="#services">الخدمات</a></li>
+          <li><a href="#doctors">أطباؤنا</a></li>
+          <li><a href="#booking">احجز موعداً</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>تواصل معنا</h3>
+        <ul>
+          <li>شارع الملك فيصل، أبو رمانة، دمشق</li>
+          <li><bdi>+963 11 445 0192</bdi></li>
+          <li>info@shamsmile.sy</li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">© 2026 عيادة ابتسامة الشام لطب الأسنان. جميع الحقوق محفوظة.</div>
+  </div>
+</footer>
+
+<script>
+  // mobile nav
+  const navToggle = document.getElementById('navToggle');
+  const navLinks = document.getElementById('navLinks');
+  navToggle.addEventListener('click', () => navLinks.classList.toggle('open'));
+  navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navLinks.classList.remove('open')));
+
+  // service card -> preselect in booking form
+  document.querySelectorAll('.service-card').forEach(card => {
+    card.addEventListener('click', () => {
+      const val = card.getAttribute('data-service');
+      const radio = document.querySelector(`input[name="service"][value="${val}"]`);
+      if (radio) radio.checked = true;
+      document.getElementById('booking').scrollIntoView({behavior:'smooth'});
+    });
+  });
+
+  // multi-step form
+  const panels = Array.from(document.querySelectorAll('.form-panel'));
+  const steps = Array.from(document.querySelectorAll('.step'));
+  let current = 1;
+
+  function goTo(n){
+    panels.forEach(p => p.classList.toggle('active', Number(p.dataset.panel) === n));
+    steps.forEach(s => {
+      const sn = Number(s.dataset.step);
+      s.classList.toggle('active', sn === n);
+      s.classList.toggle('done', sn < n);
+    });
+    current = n;
+  }
+
+  document.querySelectorAll('[data-next]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const panel = btn.closest('.form-panel');
+      const inputs = panel.querySelectorAll('input[required], select[required]');
+      let valid = true;
+      inputs.forEach(inp => { if (!inp.checkValidity()) { inp.reportValidity(); valid = false; } });
+      if (panel.querySelector('.service-pick') && !panel.querySelector('input[name="service"]:checked')) valid = false;
+      if (valid) goTo(current + 1);
+    });
+  });
+  document.querySelectorAll('[data-prev]').forEach(btn => {
+    btn.addEventListener('click', () => goTo(current - 1));
+  });
+
+  document.getElementById('bookingForm').addEventListener('submit', (e) => {
+    e.preventDefault();
+    const service = document.querySelector('input[name="service"]:checked')?.value || '';
+    const date = document.getElementById('apptDate').value;
+    const time = document.getElementById('apptTime').value;
+    const name = document.getElementById('fullName').value;
+    const phone = document.getElementById('phone').value;
+
+    document.getElementById('confirmDetail').innerHTML = `
+      <div><span>الخدمة</span><span>${service}</span></div>
+      <div><span>التاريخ</span><span>${date || '—'}</span></div>
+      <div><span>الوقت</span><span>${time || '—'}</span></div>
+      <div><span>الاسم</span><span>${name}</span></div>
+      <div><span>الجوال</span><span>${phone}</span></div>
+    `;
+    goTo(4);
+  });
+
+  document.getElementById('newBooking').addEventListener('click', () => {
+    document.getElementById('bookingForm').reset();
+    goTo(1);
+  });
+</script>
+</body>
+</html>
